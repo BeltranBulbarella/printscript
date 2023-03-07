@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test
 class MainTest {
 
     @Test
-    fun Some() {
+    fun some() {
         assert(true)
     }
 
