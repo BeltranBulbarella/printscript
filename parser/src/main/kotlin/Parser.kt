@@ -22,7 +22,7 @@ class Parser : IParser {
 
     private fun validateList(tokenList: List<Token>) {
         // TODO review with no assignation
-        if (tokenList.size < 7) throw Exception("Token list should be larger")
+        if (tokenList.size < 6) throw Exception("Token list should be larger")
         if (tokenList.first() !is UtilToken.LET_KEY_WORD) throw Exception("Token list should start with let")
         if (tokenList.last() !is UtilToken.SEMICOLON) throw Exception("Token list should finish with semicolon")
         if (tokenList[1] !is LeafToken.IDENTIFIER) throw Exception("Token list first item should be an identifier")
