@@ -17,10 +17,10 @@ class MainTest {
             ),
         )
 
-        val interpreter = Interpreter(mutableMapOf())
+        val interpreter = Interpreter(Memory(mutableMapOf()))
         interpreter.run(tree)
 
-        interpreter.getMemory()["name"]?.let {
+        interpreter.getMemory().getValue("name").let {
             assert(it is AvailableTypes.String)
             assert(it == AvailableTypes.String("Fede"))
         }
@@ -46,10 +46,61 @@ class MainTest {
                 Leaf(LeafToken.LITERAL(AvailableTypes.Number(1)))
             ),
         )
-        val interpreter = Interpreter(mutableMapOf())
+        val interpreter = Interpreter(Memory(mutableMapOf()))
         interpreter.run(tree)
 
-        interpreter.getMemory()["someNumber"]?.let {
+        interpreter.getMemory().getValue("someNumber").let {
+            assert(it is AvailableTypes.Number)
+            if(it is AvailableTypes.Number) {
+                assert(it.value == 7.0)
+            }
+        }
+    }
+
+    @Test
+    fun test3() {
+        val interpreter = Interpreter(Memory(mutableMapOf()))
+
+        // let name = "Fede";
+        val tree = AST(
+            NodeToken.ASSIGNATION,
+            AST(
+                NodeToken.DECLARATION,
+                Leaf(LeafToken.IDENTIFIER("name")),
+                Leaf(LeafToken.TYPE(Type.StringType)),
+            ),
+            Leaf(
+                LeafToken.LITERAL(AvailableTypes.String("Fede")),
+            ),
+        )
+        interpreter.run(tree)
+
+        // let someNumber = 3*2+1;
+        val tree2 = AST(
+            NodeToken.ASSIGNATION,
+            AST(
+                NodeToken.DECLARATION,
+                Leaf(LeafToken.IDENTIFIER("someNumber")),
+                Leaf(LeafToken.TYPE(Type.NumberType)),
+            ),
+            AST(
+                NodeToken.OPERATOR(SUM),
+                AST(
+                    NodeToken.OPERATOR(MULTIPLY),
+                    Leaf(LeafToken.LITERAL(AvailableTypes.Number(3))),
+                    Leaf(LeafToken.LITERAL(AvailableTypes.Number(2)))
+                ),
+                Leaf(LeafToken.LITERAL(AvailableTypes.Number(1)))
+            ),
+        )
+        interpreter.run(tree2)
+
+        interpreter.getMemory().getValue("name").let {
+            assert(it is AvailableTypes.String)
+            assert(it == AvailableTypes.String("Fede"))
+        }
+
+        interpreter.getMemory().getValue("someNumber").let {
             assert(it is AvailableTypes.Number)
             if(it is AvailableTypes.Number) {
                 assert(it.value == 7.0)

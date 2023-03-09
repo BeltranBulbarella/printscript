@@ -14,11 +14,11 @@ class AST(
         }
     }
 
-    override fun operate(): ExpressionResult {
+    override fun operate(memory: Memory): ExpressionResult {
         return when(head) {
             is NodeToken.ASSIGNATION -> {
-                val variableDeclaration = left.operate()
-                val value = right.operate()
+                val variableDeclaration = left.operate(memory)
+                val value = right.operate(memory)
                 if(
                     variableDeclaration is ExpressionResult.VariableDeclaration &&
                     (value is ExpressionResult.StringResult || value is ExpressionResult.NumberResult)
@@ -63,17 +63,9 @@ class AST(
                 }
             }
             is NodeToken.OPERATOR -> {
-                return head.operator.operate(left.operate(), right.operate())
+                return head.operator.operate(memory, left.operate(memory), right.operate(memory))
             }
         }
-    }
-
-    fun getLeft(): IAST {
-        return left
-    }
-
-    fun getRight(): IAST {
-        return right
     }
 
 }

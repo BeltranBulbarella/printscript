@@ -1,4 +1,4 @@
 sealed interface IAST {
     fun equalsTree(tree: IAST): Boolean
-    fun operate(): ExpressionResult
+    fun operate(memory: Memory): ExpressionResult
 }

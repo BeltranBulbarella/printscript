@@ -1,17 +1,18 @@
 class Interpreter (
-    private val memory: MutableMap<String, AvailableTypes>
+    private val memory: Memory
 ) {
 
     fun run(tree: IAST) {
-        when(val result = tree.operate()) {
+        when(val result = tree.operate(memory)) {
           is ExpressionResult.VariableAssignation -> {
               memory.put(result.name, result.value)
           }
-          else -> {}
+          else -> {
+              throw Error("invalid result")
+          }
         }
-        println("")
     }
 
-    fun getMemory(): Map<String, AvailableTypes> = memory
+    fun getMemory(): Memory = memory
 
 }

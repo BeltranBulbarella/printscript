@@ -1,4 +1,5 @@
 sealed class AvailableTypes {
+
     data class Number(val value: kotlin.Number) : AvailableTypes() {
         override fun equals(other: Any?): Boolean {
             return other is Number && other.value === value
@@ -10,4 +11,5 @@ sealed class AvailableTypes {
             return other is String && other.string === string
         }
     }
+
 }

@@ -3,6 +3,7 @@ import kotlin.math.E
 class Leaf(
     private val value: LeafToken
 ) : IAST {
+
     override fun equalsTree(tree: IAST): Boolean {
         return if (tree is Leaf) {
             when (value) {
@@ -15,10 +16,10 @@ class Leaf(
         }
     }
 
-    override fun operate(): ExpressionResult {
-        when(value) {
+    override fun operate(memory: Memory): ExpressionResult {
+        return when(value) {
             is LeafToken.LITERAL -> {
-                return when(val literalValue = value.literal) {
+                when(val literalValue = value.literal) {
                     is AvailableTypes.Number -> {
                         ExpressionResult.NumberResult(literalValue.value)
                     }
@@ -28,13 +29,13 @@ class Leaf(
                     }
                 }
             }
+
             else -> {
-                return ExpressionResult.StringResult("some")
+                ExpressionResult.StringResult("some")
             }
         }
     }
 
     fun getValue() = value
-
 
 }
