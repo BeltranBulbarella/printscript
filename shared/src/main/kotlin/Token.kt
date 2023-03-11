@@ -1,13 +1,13 @@
-
-
 sealed interface Token
 
 sealed class NodeToken : Token {
     object ASSIGNATION : NodeToken()
 
-    object DECLARATION : NodeToken()
+    object COLON : NodeToken()
 
     data class OPERATOR(val operator: Operator) : NodeToken()
+
+    data class FUNCTION(val function: String) : NodeToken()
 }
 
 sealed class LeafToken : Token {
@@ -20,4 +20,7 @@ sealed class LeafToken : Token {
 sealed class UtilToken : Token {
     object LET_KEY_WORD : UtilToken()
     object SEMICOLON : UtilToken()
+
+    object OPENING_PARENTHESIS : UtilToken()
+    object CLOSING_PARENTHESIS : UtilToken()
 }

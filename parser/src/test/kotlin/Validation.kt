@@ -1,3 +1,4 @@
+import implementation.Parser // ktlint-disable filename
 import org.junit.jupiter.api.Test
 import kotlin.test.assertFailsWith
 
@@ -7,9 +8,9 @@ class ValidationTest {
 
     @Test
     fun emptyListShouldThrowError() {
-        assertFailsWith<Exception> (
+        assertFailsWith<Exception>(
             message = "Token list should be larger",
-            block = { parser.parse(emptyList()) },
+            block = { parser.parse(emptyList()) }
         )
     }
 
@@ -20,12 +21,12 @@ class ValidationTest {
             LeafToken.TYPE(Type.StringType),
             NodeToken.ASSIGNATION,
             LeafToken.LITERAL(AvailableTypes.String("Fede")),
-            UtilToken.SEMICOLON,
+            UtilToken.SEMICOLON
         )
 
-        assertFailsWith<Exception> (
+        assertFailsWith<Exception>(
             message = "Token list should start with let",
-            block = { parser.parse(errorList) },
+            block = { parser.parse(errorList) }
         )
     }
 }

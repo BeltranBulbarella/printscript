@@ -1,3 +1,4 @@
+import implementation.Parser // ktlint-disable filename
 import org.junit.jupiter.api.Test
 import kotlin.test.assertTrue
 
@@ -13,19 +14,19 @@ class MainTest {
             LeafToken.TYPE(Type.StringType),
             NodeToken.ASSIGNATION,
             LeafToken.LITERAL(AvailableTypes.String("Fede")),
-            UtilToken.SEMICOLON,
+            UtilToken.SEMICOLON
         )
 
         val expectedTree = AST(
             NodeToken.ASSIGNATION,
             AST(
-                NodeToken.DECLARATION,
+                NodeToken.COLON,
                 Leaf(LeafToken.IDENTIFIER("name")),
-                Leaf(LeafToken.TYPE(Type.StringType)),
+                Leaf(LeafToken.TYPE(Type.StringType))
             ),
             Leaf(
-                LeafToken.LITERAL(AvailableTypes.String("Fede")),
-            ),
+                LeafToken.LITERAL(AvailableTypes.String("Fede"))
+            )
         )
 
         assertTrue { expectedTree.equalsTree(parser.parse(tokenList)) }
