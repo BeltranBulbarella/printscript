@@ -11,7 +11,7 @@ class InterpreterVisitor(
             if(isSameType(declarationAST.variableType, literalAST.value)) {
                 memory.put(declarationAST.variableName, literalAST.value)
             } else {
-                throw Error("invalid type assignation")
+                throw Error("Invalid type assignation")
             }
         } else {
             throw Error("Invalid tree")
@@ -38,10 +38,10 @@ class InterpreterVisitor(
                 is SUBTRACT -> LiteralAST(subtractValues(leftResult.value, rightResult.value))
                 is DIVIDE -> LiteralAST(divideValues(leftResult.value,rightResult.value))
                 is MULTIPLY -> LiteralAST(multiplyValues(leftResult.value,rightResult.value))
-                else -> throw Error("invalid operation")
+                else -> throw Error("Invalid operation")
             }
         }
-        throw Error("invalid expression")
+        throw Error("Invalid expression")
     }
 
     private fun sumValues(left: Value, right: Value): Value {
@@ -54,28 +54,28 @@ class InterpreterVisitor(
         } else if (left is StrValue && right is StrValue) {
             return StrValue(left.value+right.value)
         }
-        throw Error("can not sum values")
+        throw Error("Can not sum values")
     }
 
     private fun subtractValues(left: Value, right: Value): Value {
         if(left is NumValue && right is NumValue) {
             return NumValue(left.value-right.value)
         }
-        throw Error("can not subtract values")
+        throw Error("Can not subtract values")
     }
 
     private fun divideValues(left: Value, right: Value): Value {
         if(left is NumValue && right is NumValue) {
             return NumValue(left.value/right.value)
         }
-        throw Error("can not divide values")
+        throw Error("Can not divide values")
     }
 
     private fun multiplyValues(left: Value, right: Value): Value {
         if(left is NumValue && right is NumValue) {
             return NumValue(left.value*right.value)
         }
-        throw Error("can not multiply values")
+        throw Error("Can not multiply values")
     }
 
     override fun visitUnaryOperationAST(ast: UnaryOperationAST): VisitableAST {
@@ -93,7 +93,7 @@ class InterpreterVisitor(
                 }
                 EmptyAST()
             }
-            else -> throw Error("can not print value")
+            else -> throw Error("Can not print value")
         }
     }
 
@@ -116,7 +116,7 @@ class InterpreterVisitor(
 class LocalMemory(private val memory: MutableMap<String, Value>) {
 
     fun getValue(key: String): Value {
-        return memory[key] ?: throw Error("variable " + key + "not found")
+        return memory[key] ?: throw Error("Variable " + key + "not found")
     }
 
     fun put(key: String, value: Value) = run { memory[key]=value }
