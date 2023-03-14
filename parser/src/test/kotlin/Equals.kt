@@ -49,7 +49,7 @@ class EqualsTest {
             ),
         )
         val right = AST(
-            NodeToken.DECLARATION,
+            NodeToken.ASSIGNATION,
             Leaf(LeafToken.IDENTIFIER("name")),
             Leaf(
                 LeafToken.LITERAL(AvailableTypes.String("test")),
