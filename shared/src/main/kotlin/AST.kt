@@ -7,3 +7,4 @@ class AST(private val head: NodeToken, private val left: IAST, private val right
         }
     }
 }
+
