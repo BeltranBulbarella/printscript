@@ -34,10 +34,10 @@ class InterpreterVisitor(
         val rightResult = ast.right.accept(this)
         if(leftResult is LiteralAST && rightResult is LiteralAST) {
             return when (ast.operation) {
-                is SUM -> LiteralAST(sumValues(leftResult.value, rightResult.value))
-                is SUBTRACT -> LiteralAST(subtractValues(leftResult.value, rightResult.value))
-                is DIVIDE -> LiteralAST(divideValues(leftResult.value,rightResult.value))
-                is MULTIPLY -> LiteralAST(multiplyValues(leftResult.value,rightResult.value))
+                is ADD -> LiteralAST(sumValues(leftResult.value, rightResult.value))
+                is SUB -> LiteralAST(subtractValues(leftResult.value, rightResult.value))
+                is DIV -> LiteralAST(divideValues(leftResult.value,rightResult.value))
+                is MUL -> LiteralAST(multiplyValues(leftResult.value,rightResult.value))
                 else -> throw Error("Invalid operation")
             }
         }

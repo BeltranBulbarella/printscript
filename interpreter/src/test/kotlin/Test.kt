@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test
 import visitor.*
-import visitor.MULTIPLY
-import visitor.SUM
 
 class Test {
 
@@ -17,10 +15,10 @@ class Test {
                 BinaryOperationAST(
                     LiteralAST(NumValue(3.0)),
                     LiteralAST(NumValue(2.0)),
-                    MULTIPLY
+                    MUL
                 ),
                 LiteralAST(NumValue(1.0)),
-                SUM
+                ADD
             )
         )
         val interpreter = Interpreter.Factory.create()
@@ -39,7 +37,7 @@ class Test {
             BinaryOperationAST(
                 LiteralAST(StrValue("some")),
                 LiteralAST(NumValue(1.0)),
-                SUM
+                ADD
             )
         )
         val interpreter = Interpreter.Factory.create()
@@ -60,7 +58,7 @@ class Test {
             BinaryOperationAST(
                 LiteralAST(StrValue("some")),
                 LiteralAST(NumValue(1.0)),
-                SUM
+                ADD
             )
         )
         val tree2 = AssignationAST(
@@ -71,7 +69,7 @@ class Test {
             BinaryOperationAST(
                 LiteralAST(StrValue("new ")),
                 VariableAST("someString"),
-                SUM
+                ADD
             )
         )
         val interpreter = Interpreter.Factory.create()
@@ -92,7 +90,7 @@ class Test {
             BinaryOperationAST(
                 LiteralAST(StrValue("some")),
                 LiteralAST(NumValue(1.0)),
-                SUM
+                ADD
             )
         )
         //print(someString);

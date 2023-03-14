@@ -50,10 +50,10 @@ class EmptyAST() : VisitableAST {
 }
 
 sealed interface Operation
-object SUM : Operation
-object SUBTRACT : Operation
-object DIVIDE : Operation
-object MULTIPLY : Operation
+object ADD : Operation
+object SUB : Operation
+object DIV : Operation
+object MUL : Operation
 
 sealed interface Types
 object NUM: Types
