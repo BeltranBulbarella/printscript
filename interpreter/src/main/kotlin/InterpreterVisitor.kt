@@ -1,7 +1,7 @@
-package visitor
+import visitor.*
 
 class InterpreterVisitor(
-    private val memory: LocalMemory
+    val memory: LocalMemory
 ) : Visitor {
 
     override fun visitAssignationAST(ast: AssignationAST): EmptyAST {
@@ -109,16 +109,8 @@ class InterpreterVisitor(
         return ast
     }
 
-    fun getMemory(): LocalMemory = memory
-
 }
 
-class LocalMemory(private val memory: MutableMap<String, Value>) {
 
-    fun getValue(key: String): Value {
-        return memory[key] ?: throw Error("Variable " + key + "not found")
-    }
 
-    fun put(key: String, value: Value) = run { memory[key]=value }
-}
 

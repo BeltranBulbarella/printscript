@@ -23,8 +23,8 @@ class Test {
                 SUM
             )
         )
-        val interpreter = InterpreterVisitor(LocalMemory(mutableMapOf()))
-        tree.accept(interpreter)
+        val interpreter = Interpreter.Factory.create()
+        interpreter.interpret(tree)
         assert((interpreter.getMemory().getValue("someNumber") as NumValue).value == 7.0)
     }
 
@@ -42,8 +42,8 @@ class Test {
                 SUM
             )
         )
-        val interpreter = InterpreterVisitor(LocalMemory(mutableMapOf()))
-        tree.accept(interpreter)
+        val interpreter = Interpreter.Factory.create()
+        interpreter.interpret(tree)
         assert((interpreter.getMemory().getValue("someString") as StrValue).value == "some1.0")
     }
 
@@ -74,9 +74,9 @@ class Test {
                 SUM
             )
         )
-        val interpreter = InterpreterVisitor(LocalMemory(mutableMapOf()))
-        tree1.accept(interpreter)
-        tree2.accept(interpreter)
+        val interpreter = Interpreter.Factory.create()
+        interpreter.interpret(tree1)
+        interpreter.interpret(tree2)
         assert((interpreter.getMemory().getValue("someString") as StrValue).value == "some1.0")
         assert((interpreter.getMemory().getValue("newSomeString") as StrValue).value == "new some1.0")
     }
@@ -100,9 +100,9 @@ class Test {
             PRINT,
             VariableAST("someString")
         )
-        val interpreter = InterpreterVisitor(LocalMemory(mutableMapOf()))
-        tree1.accept(interpreter)
-        tree2.accept(interpreter)
+        val interpreter = Interpreter.Factory.create()
+        interpreter.interpret(tree1)
+        interpreter.interpret(tree2)
     }
 
 }
